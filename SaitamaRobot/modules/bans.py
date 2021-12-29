@@ -67,7 +67,6 @@ from SaitamaRobot.modules.helper_funcs.string_handling import extract_time
 from SaitamaRobot.modules.log_channel import gloggable, loggable
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_restrict
@@ -189,7 +188,6 @@ def ban(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_restrict
@@ -297,7 +295,6 @@ def temp_ban(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_restrict
@@ -348,7 +345,7 @@ def unbanb_btn(update: Update, context: CallbackContext) -> str:
         bot.answer_callback_query(query.id, text="Deleted!")
         return ""
 
-@run_async 
+
 @connection_status
 @bot_admin
 @can_restrict
@@ -408,7 +405,6 @@ def punch(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@run_async
 @bot_admin
 @can_restrict
 def punchme(update: Update, context: CallbackContext):
@@ -423,7 +419,7 @@ def punchme(update: Update, context: CallbackContext):
     else:
         update.effective_message.reply_text("Huh? I can't :/")
 
-@run_async
+
 @connection_status
 @bot_admin
 @can_restrict
@@ -471,7 +467,7 @@ def unban(update: Update, context: CallbackContext) -> str:
 
     return log
 
-@run_async
+
 @connection_status
 @bot_admin
 @can_restrict
@@ -515,7 +511,7 @@ def selfunban(update: Update, context: CallbackContext) -> str:
 
     return log
 
-@run_async
+
 @bot_admin
 @can_restrict
 @loggable
@@ -545,7 +541,6 @@ def banme(update: Update, context: CallbackContext):
         update.effective_message.reply_text("Huh? I can't :/")
 
 
-@run_async
 @dev_plus
 def snipe(update: Update, context: CallbackContext):
     args = context.args
@@ -587,15 +582,15 @@ __help__ = """
 """
 
 
-BAN_HANDLER = CommandHandler(["ban", "sban"], ban)
-TEMPBAN_HANDLER = CommandHandler(["tban"], temp_ban)
-KICK_HANDLER = CommandHandler(["kick", "punch"], punch)
-UNBAN_HANDLER = CommandHandler("unban", unban)
-ROAR_HANDLER = CommandHandler("roar", selfunban)
-UNBAN_BUTTON_HANDLER = CallbackQueryHandler(unbanb_btn, pattern=r"unbanb_")
-KICKME_HANDLER = DisableAbleCommandHandler(["kickme", "punchme"], punchme, filters=Filters.group)
-SNIPE_HANDLER = CommandHandler("snipe", snipe, pass_args=True, filters=CustomFilters.sudo_filter)
-BANME_HANDLER = CommandHandler("banme", banme)
+BAN_HANDLER = CommandHandler(["ban", "sban"], ban, run_async=true)
+TEMPBAN_HANDLER = CommandHandler(["tban"], temp_ban, run_async=true)
+KICK_HANDLER = CommandHandler(["kick", "punch"], punch, run_async=true)
+UNBAN_HANDLER = CommandHandler("unban", unban, run_async=true)
+ROAR_HANDLER = CommandHandler("roar", selfunban, run_async=true)
+UNBAN_BUTTON_HANDLER = CallbackQueryHandler(unbanb_btn, pattern=r"unbanb_", run_async=true)
+KICKME_HANDLER = DisableAbleCommandHandler(["kickme", "punchme"], punchme, filters=Filters.group, run_async=true)
+SNIPE_HANDLER = CommandHandler("snipe", snipe, pass_args=True, filters=CustomFilters.sudo_filter, run_async=true)
+BANME_HANDLER = CommandHandler("banme", banme, run_async=true)
 
 dispatcher.add_handler(BAN_HANDLER)
 dispatcher.add_handler(TEMPBAN_HANDLER)

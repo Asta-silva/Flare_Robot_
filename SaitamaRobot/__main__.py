@@ -635,26 +635,26 @@ def main():
         except BadRequest as e:
             LOGGER.warning(e.message)
 
-    test_handler = CommandHandler("test", test)
-    start_handler = CommandHandler("start", start)
+    test_handler = CommandHandler("test", test, run_async=true)
+    start_handler = CommandHandler("start", start, run_async=true)
 
-    help_handler = CommandHandler("help", get_help)
-    help_callback_handler = CallbackQueryHandler(help_button, pattern=r"help_.*")
+    help_handler = CommandHandler("help", get_help, run_async=true)
+    help_callback_handler = CallbackQueryHandler(help_button, pattern=r"help_.*", run_async=true)
 
-    settings_handler = CommandHandler("settings", get_settings)
-    settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_")
+    settings_handler = CommandHandler("settings", get_settings, run_async=true)
+    settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_", run_async=true)
 
-    donate_handler = CommandHandler("donate", donate)
-    migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
+    donate_handler = CommandHandler("donate", donate, run_async=true)
+    migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats, run_async=true)
 
-    # dispatcher.add_handler(test_handler, run_async=true)
-    dispatcher.add_handler(start_handler, run_async=true)
-    dispatcher.add_handler(help_handler, run_async=true)
-    dispatcher.add_handler(settings_handler, run_async=true)
-    dispatcher.add_handler(help_callback_handler, run_async=true)
-    dispatcher.add_handler(settings_callback_handler, run_async=true)
-    dispatcher.add_handler(migrate_handler, run_async=true)
-    dispatcher.add_handler(donate_handler, run_async=true)
+    # dispatcher.add_handler(test_handler)
+    dispatcher.add_handler(start_handler)
+    dispatcher.add_handler(help_handler)
+    dispatcher.add_handler(settings_handler)
+    dispatcher.add_handler(help_callback_handler)
+    dispatcher.add_handler(settings_callback_handler)
+    dispatcher.add_handler(migrate_handler)
+    dispatcher.add_handler(donate_handler)
 
     dispatcher.add_error_handler(error_callback, run_async=true)
 

@@ -4,7 +4,7 @@ import requests as r
 from SaitamaRobot import SUPPORT_CHAT, WALL_API, dispatcher
 from SaitamaRobot.modules.disable import DisableAbleCommandHandler
 from telegram import Update
-from telegram.ext import CallbackContext
+from telegram.ext import CallbackContext, run_async
 
 # Wallpapers module by @TheRealPhoenix using wall.alphacoders.com
 

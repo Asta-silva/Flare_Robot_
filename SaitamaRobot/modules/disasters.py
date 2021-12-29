@@ -44,7 +44,7 @@ def check_user_id(user_id: int, context: CallbackContext) -> Optional[str]:
 
 # FtSasaki adding add to pro developer cmd :D
 
-@run_async
+
 @dev_plus
 @gloggable
 def addpiro(update: Update, context: CallbackContext) -> str:
@@ -104,7 +104,6 @@ def addpiro(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@run_async
 @dev_plus
 @gloggable
 def addsudo(update: Update, context: CallbackContext) -> str:
@@ -160,7 +159,6 @@ def addsudo(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@run_async
 @sudo_plus
 @gloggable
 def addsupport(
@@ -218,7 +216,6 @@ def addsupport(
     return log_message
 
 
-@run_async
 @sudo_plus
 @gloggable
 def addwhitelist(update: Update, context: CallbackContext) -> str:
@@ -274,7 +271,6 @@ def addwhitelist(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@run_async
 @sudo_plus
 @gloggable
 def addtiger(update: Update, context: CallbackContext) -> str:
@@ -338,7 +334,6 @@ def addtiger(update: Update, context: CallbackContext) -> str:
 # FtSasaki adding rmpiro to remove user from {devs}
 
 
-@run_async
 @dev_plus
 @gloggable
 def rmpiro(update: Update, context: CallbackContext) -> str:
@@ -382,7 +377,6 @@ def rmpiro(update: Update, context: CallbackContext) -> str:
         return ""
 
 
-@run_async
 @dev_plus
 @gloggable
 def removesudo(update: Update, context: CallbackContext) -> str:
@@ -426,7 +420,6 @@ def removesudo(update: Update, context: CallbackContext) -> str:
         return ""
 
 
-@run_async
 @sudo_plus
 @gloggable
 def removesupport(update: Update, context: CallbackContext) -> str:
@@ -469,7 +462,6 @@ def removesupport(update: Update, context: CallbackContext) -> str:
         return ""
 
 
-@run_async
 @sudo_plus
 @gloggable
 def removewhitelist(update: Update, context: CallbackContext) -> str:
@@ -511,7 +503,6 @@ def removewhitelist(update: Update, context: CallbackContext) -> str:
         return ""
 
 
-@run_async
 @sudo_plus
 @gloggable
 def removetiger(update: Update, context: CallbackContext) -> str:
@@ -552,7 +543,6 @@ def removetiger(update: Update, context: CallbackContext) -> str:
         return ""
 
 
-@run_async
 @whitelist_plus
 def whitelist(update: Update, context: CallbackContext):
     reply = "<b>Known as Demi-Humans 🐺:</b>\n"
@@ -568,7 +558,6 @@ def whitelist(update: Update, context: CallbackContext):
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
 
-@run_async
 @whitelist_plus
 def tigerlist(update: Update, context: CallbackContext):
     reply = "<b>Known as Difenders :</b>\n"
@@ -583,7 +572,6 @@ def tigerlist(update: Update, context: CallbackContext):
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
 
-@run_async
 @whitelist_plus
 def supportlist(update: Update, context: CallbackContext):
     bot = context.bot
@@ -598,7 +586,6 @@ def supportlist(update: Update, context: CallbackContext):
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
 
-@run_async
 @whitelist_plus
 def sudolist(update: Update, context: CallbackContext):
     bot = context.bot
@@ -614,7 +601,6 @@ def sudolist(update: Update, context: CallbackContext):
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
 
-@run_async
 @whitelist_plus
 def devlist(update: Update, context: CallbackContext):
     bot = context.bot
@@ -708,26 +694,26 @@ Group admins/group owners do not need these commands.
 Visit @{SUPPORT_CHAT} for more information.
 """
 
-DEV_HANDLER = CommandHandler(("addpiro", "addheal"), addpiro)
-SUDO_HANDLER = CommandHandler(("addsudo", "addknight"), addsudo)
-SUPPORT_HANDLER = CommandHandler(("addsupport", "addattack"), addsupport)
-TIGER_HANDLER = CommandHandler(("adddefend"), addtiger)
-WHITELIST_HANDLER = CommandHandler(("adddemi", "addwolf"), addwhitelist)
+DEV_HANDLER = CommandHandler(("addpiro", "addheal"), addpiro, run_async=true)
+SUDO_HANDLER = CommandHandler(("addsudo", "addknight"), addsudo, run_async=true)
+SUPPORT_HANDLER = CommandHandler(("addsupport", "addattack"), addsupport, run_async=true)
+TIGER_HANDLER = CommandHandler(("adddefend"), addtiger, run_async=true)
+WHITELIST_HANDLER = CommandHandler(("adddemi", "addwolf"), addwhitelist, run_async=true)
 
-RMPIRO_HANDLER = CommandHandler(("rmknight", "removesudo"), rmpiro)
-UNSUDO_HANDLER = CommandHandler(("removesudo", "rmheal"), removesudo)
+RMPIRO_HANDLER = CommandHandler(("rmknight", "removesudo"), rmpiro, run_async=true)
+UNSUDO_HANDLER = CommandHandler(("removesudo", "rmheal"), removesudo, run_async=true)
 UNSUPPORT_HANDLER = CommandHandler(("removesupport", "rmattack"),
-                                   removesupport)
-UNTIGER_HANDLER = CommandHandler(("rmdefend"), removetiger)
+                                   removesupport, run_async=true)
+UNTIGER_HANDLER = CommandHandler(("rmdefend"), removetiger, run_async=true)
 UNWHITELIST_HANDLER = CommandHandler(("removewhitelist", "rmdemi"),
-                                     removewhitelist)
+                                     removewhitelist, run_async=true)
 
 WHITELISTLIST_HANDLER = CommandHandler(["whitelist", "demilist"],
-                                       whitelist)
-TIGERLIST_HANDLER = CommandHandler(["defenders"], tigerlist)
-SUPPORTLIST_HANDLER = CommandHandler(["supportlist", "attackers"], supportlist)
-SUDOLIST_HANDLER = CommandHandler(["sudolist", "knights"], sudolist)
-DEVLIST_HANDLER = CommandHandler(["devlist", "healers"], devlist)
+                                       whitelist, run_async=true)
+TIGERLIST_HANDLER = CommandHandler(["defenders"], tigerlist, run_async=true)
+SUPPORTLIST_HANDLER = CommandHandler(["supportlist", "attackers"], supportlist, run_async=true)
+SUDOLIST_HANDLER = CommandHandler(["sudolist", "knights"], sudolist, run_async=true)
+DEVLIST_HANDLER = CommandHandler(["devlist", "healers"], devlist, run_async=true)
 
 dispatcher.add_handler(DEV_HANDLER)
 dispatcher.add_handler(SUDO_HANDLER)

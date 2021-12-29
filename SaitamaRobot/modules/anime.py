@@ -168,7 +168,6 @@ def extract_arg(message: Message):
         return reply.text
     return None
 
-@run_async
 def airing(update: Update, context: CallbackContext):
     message = update.effective_message
     search_str = extract_arg(message)
@@ -191,7 +190,6 @@ def airing(update: Update, context: CallbackContext):
     update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
 
-@run_async
 def anime(update: Update, context: CallbackContext):
     message = update.effective_message
     search = extract_arg(message)
@@ -263,7 +261,6 @@ def anime(update: Update, context: CallbackContext):
             )
 
 
-@run_async
 def character(update: Update, context: CallbackContext):
     message = update.effective_message
     search = extract_arg(message)
@@ -297,7 +294,6 @@ def character(update: Update, context: CallbackContext):
             )
 
 
-@run_async
 def manga(update: Update, context: CallbackContext):
     message = update.effective_message
     search = extract_arg(message)
@@ -363,7 +359,6 @@ def manga(update: Update, context: CallbackContext):
             )
 
 
-@run_async
 def user(update: Update, context: CallbackContext):
     message = update.effective_message
     search_query = extract_arg(message)
@@ -447,7 +442,6 @@ def user(update: Update, context: CallbackContext):
     progress_message.delete()
 
 
-@run_async
 def upcoming(update: Update, context: CallbackContext):
     jikan = jikanpy.jikan.Jikan()
     upcomin = jikan.top("anime", page=1, subtype="upcoming")
@@ -521,12 +515,10 @@ def site_search(update: Update, context: CallbackContext, site: str):
         )
 
 
-@run_async
 def kaizoku(update: Update, context: CallbackContext):
     site_search(update, context, "kaizoku")
 
 
-@run_async
 def kayo(update: Update, context: CallbackContext):
     site_search(update, context, "kayo")
 
@@ -547,14 +539,14 @@ Get information about anime, manga or characters from [AniList](anilist.co).
 
  """
 
-ANIME_HANDLER = DisableAbleCommandHandler("anime", anime)
-AIRING_HANDLER = DisableAbleCommandHandler("airing", airing)
-CHARACTER_HANDLER = DisableAbleCommandHandler("character", character)
-MANGA_HANDLER = DisableAbleCommandHandler("manga", manga)
-USER_HANDLER = DisableAbleCommandHandler("user", user)
-UPCOMING_HANDLER = DisableAbleCommandHandler("upcoming", upcoming)
-KAIZOKU_SEARCH_HANDLER = DisableAbleCommandHandler("kaizoku", kaizoku)
-KAYO_SEARCH_HANDLER = DisableAbleCommandHandler("kayo", kayo)
+ANIME_HANDLER = DisableAbleCommandHandler("anime", anime, run_async=true)
+AIRING_HANDLER = DisableAbleCommandHandler("airing", airing, run_async=true)
+CHARACTER_HANDLER = DisableAbleCommandHandler("character", character, run_async=true)
+MANGA_HANDLER = DisableAbleCommandHandler("manga", manga, run_async=true)
+USER_HANDLER = DisableAbleCommandHandler("user", user, run_async=true)
+UPCOMING_HANDLER = DisableAbleCommandHandler("upcoming", upcoming, run_async=true)
+KAIZOKU_SEARCH_HANDLER = DisableAbleCommandHandler("kaizoku", kaizoku, run_async=true)
+KAYO_SEARCH_HANDLER = DisableAbleCommandHandler("kayo", kayo, run_async=true)
 
 dispatcher.add_handler(ANIME_HANDLER)
 dispatcher.add_handler(CHARACTER_HANDLER)

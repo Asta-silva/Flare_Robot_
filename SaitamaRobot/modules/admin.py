@@ -19,7 +19,6 @@ from SaitamaRobot.modules.log_channel import loggable
 from SaitamaRobot.modules.helper_funcs.alternate import send_message
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_promote
@@ -275,7 +274,6 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
 
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_promote
@@ -362,7 +360,6 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
 
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_promote
@@ -435,7 +432,6 @@ def demote(update: Update, context: CallbackContext) -> str:
         return
 
 
-@run_async
 @user_admin
 def refresh_admin(update, _):
     try:
@@ -446,7 +442,6 @@ def refresh_admin(update, _):
     update.effective_message.reply_text("Admins cache refreshed!")
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_promote
@@ -510,7 +505,6 @@ def set_title(update: Update, context: CallbackContext):
         parse_mode=ParseMode.HTML)
 
 
-@run_async
 @bot_admin
 @can_pin
 @user_admin
@@ -550,7 +544,6 @@ def pin(update: Update, context: CallbackContext) -> str:
         return log_message
 
 
-@run_async
 @bot_admin
 @can_pin
 @user_admin
@@ -576,7 +569,6 @@ def unpin(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@run_async
 @bot_admin
 @user_admin
 @connection_status
@@ -601,7 +593,6 @@ def invite(update: Update, context: CallbackContext):
         )
 
 
-@run_async
 @connection_status
 def adminlist(update, context):
     chat = update.effective_chat  
@@ -727,21 +718,21 @@ __help__ = """
  • `/admincache`*:* force refresh the admins list
 """
 
-ADMINLIST_HANDLER = DisableAbleCommandHandler("admins", adminlist)
+ADMINLIST_HANDLER = DisableAbleCommandHandler("admins", adminlist, run_async=true)
 
-PIN_HANDLER = CommandHandler("pin", pin, filters=Filters.group)
-UNPIN_HANDLER = CommandHandler("unpin", unpin, filters=Filters.group)
+PIN_HANDLER = CommandHandler("pin", pin, filters=Filters.group, run_async=true)
+UNPIN_HANDLER = CommandHandler("unpin", unpin, filters=Filters.group, run_async=true)
 
-INVITE_HANDLER = DisableAbleCommandHandler("invitelink", invite)
-FULLPROMOTE_HANDLER = DisableAbleCommandHandler("fullpromote", fullpromote)
+INVITE_HANDLER = DisableAbleCommandHandler("invitelink", invite, run_async=true)
+FULLPROMOTE_HANDLER = DisableAbleCommandHandler("fullpromote", fullpromote, run_async=true)
 
-PROMOTE_HANDLER = DisableAbleCommandHandler("promote", promote)
-DEMOTE_HANDLER = DisableAbleCommandHandler("demote", demote)
-LOW_PROMOTE_HANDLER = DisableAbleCommandHandler("lowpromote", lowpromote)
-MID_PROMOTE_HANDLER = DisableAbleCommandHandler("midpromote", midpromote)
-SET_TITLE_HANDLER = CommandHandler("title", set_title)
+PROMOTE_HANDLER = DisableAbleCommandHandler("promote", promote, run_async=true)
+DEMOTE_HANDLER = DisableAbleCommandHandler("demote", demote, run_async=true)
+LOW_PROMOTE_HANDLER = DisableAbleCommandHandler("lowpromote", lowpromote, run_async=true)
+MID_PROMOTE_HANDLER = DisableAbleCommandHandler("midpromote", midpromote, run_async=true)
+SET_TITLE_HANDLER = CommandHandler("title", set_title, run_async=true)
 ADMIN_REFRESH_HANDLER = CommandHandler(
-    "admincache", refresh_admin, filters=Filters.group)
+    "admincache", refresh_admin, filters=Filters.group, run_async=true)
 
 dispatcher.add_handler(ADMINLIST_HANDLER)
 dispatcher.add_handler(PIN_HANDLER)

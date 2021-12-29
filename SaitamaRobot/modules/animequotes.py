@@ -20,7 +20,6 @@ from SaitamaRobot.modules.helper_funcs.chat_status import (is_user_admin)
 
 from SaitamaRobot.modules.helper_funcs.extraction import extract_user
 
-@run_async
 
 def animequotes(update: Update, context: CallbackContext):
 
@@ -42,7 +41,7 @@ __help__ = """
 
 """
 
-ANIMEQUOTES_HANDLER = DisableAbleCommandHandler("animequotes", animequotes)
+ANIMEQUOTES_HANDLER = DisableAbleCommandHandler("animequotes", animequotes, run_async=true)
 
 dispatcher.add_handler(ANIMEQUOTES_HANDLER)
 
